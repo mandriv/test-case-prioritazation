@@ -1,0 +1,7 @@
+{
+  "TEST_DATA_PATH": "data/smallfaultmatrix.txt",
+  "ALGORITHM": "hill_climber",
+  "SETTINGS": {
+    "TIME_LIMIT": 70
+  }
+}

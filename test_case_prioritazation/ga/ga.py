@@ -4,11 +4,6 @@ import math
 from .individual import Individual
 from .utils import roulette_wheel_selection
 
-# To-do
-'''
-- adding and deleting tests based on chance
-'''
-
 def start(tests, config):
     # config
     INITIAL_NUMBER_OF_TESTS = config['INITIAL_NUMBER_OF_TESTS']
