@@ -36,9 +36,10 @@ def start(tests, config):
         new_individual = Individual(None, tests, random.randint(1, len(tests)))
         if new_individual.fitness > individual.fitness:
             individual = new_individual
+
         iteration_number += 1
-    evaluation_graph.draw_graph('Best fitness individual over iteration', 'Iteration number', 'Fitness')
     # Printing graph of best fitted individual
+    evaluation_graph.draw_graph('Best fitness individual over iteration', 'Iteration number', 'Fitness')
     print('Top individual found after ' + str(TIME_LIMIT) + 's is:')
     individual.print()
     individual.draw_graphs()

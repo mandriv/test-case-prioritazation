@@ -4,6 +4,7 @@ import random
 import copy
 
 from ..ga.individual import Individual
+from ..utils import stats
 
 def start(tests, config):
     TIME_LIMIT = config['TIME_LIMIT']
@@ -14,6 +15,8 @@ def start(tests, config):
     start_time = time.time()
     elapsed = 0
     last_elapsed_time_floored = 0
+    iteration_number = 0
+    evaluation_graph = stats.Graph()
     # Generate initial solution
     print('Initial random solution:')
     individual = Individual(None, tests, random.randint(1, len(tests)))
@@ -32,6 +35,8 @@ def start(tests, config):
             print(str(math.ceil(TIME_LIMIT - elapsed)) + 's left, current best solution: ')
             individual.print()
         last_elapsed_time_floored = current_elapsed_time_floored
+        # Stats
+        evaluation_graph.add_data(iteration_number, individual.fitness)
         # Generate new candidates
         candidates = []
         # original
@@ -52,8 +57,11 @@ def start(tests, config):
         # sort candidates by fitness
         candidates.sort(key=lambda individual: individual.fitness, reverse=True)
         # pick best one as new individual
-        individual = candidates[0]
+        individual = copy.copy(candidates[0])
+
+        iteration_number += 1
     # Printing graph of best fitted individual
+    evaluation_graph.draw_graph('Best fitness individual over iteration', 'Iteration number', 'Fitness')
     print('Top individual found after ' + str(TIME_LIMIT) + 's is:')
     individual.print()
     individual.draw_graphs()
