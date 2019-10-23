@@ -2,7 +2,8 @@ import time
 import math
 
 from .individual import Individual
-from .utils import roulette_wheel_selection
+from .helpers import roulette_wheel_selection
+from ..utils import stats
 
 def start(tests, config):
     # config
@@ -21,6 +22,7 @@ def start(tests, config):
     start_time = time.time()
     elapsed = 0
     last_elapsed_time_floored = 0
+    evaluation_graph = stats.Graph()
     print('Creating random population 0...')
     # generate random population
     for _ in range(POPULATION_SIZE):
@@ -47,15 +49,18 @@ def start(tests, config):
         last_elapsed_time_floored = current_elapsed_time_floored
         # Sort generation by fitness
         population.sort(key=lambda individual: individual.fitness, reverse=True)
+        # Assign best individual in generation 0
         if generation_number == 0:
             best_individual = Individual(population[0].genes)
             print('Fittest individual in generation 0:')
             best_individual.print()
-        # Helper printing when finding new best fitness
+        # Check if new best individual was found
         if (population[0].fitness > best_individual.fitness):
             print('New fittest individual found in population ' + str(generation_number) + '!')
             population[0].print_comparison(best_individual)
             best_individual = Individual(population[0].genes)
+        # Assign fitness of best individual and generation no for statistics
+        evaluation_graph.add_data(generation_number, best_individual.fitness)
         # prepare new population, apply elitism
         new_population = population[:ELITES_SIZE]
         # create offspring
@@ -83,6 +88,8 @@ def start(tests, config):
         # replace old population with the new one
         population = new_population
         generation_number += 1
+    # Draw statistics
+    evaluation_graph.draw_graph('Best fitness individual over generation', 'Generation number', 'Fitness')
     # Printing graph of best fitted individual
     print('Top individual found after ' + str(TIME_LIMIT) + 's is:')
     population[0].print()
