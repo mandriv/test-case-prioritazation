@@ -1,5 +1,5 @@
 {
-  "TEST_DATA_PATH": "data/smallfaultmatrix.txt",
+  "TEST_DATA_PATH": "data/bigfaultmatrix.txt",
   "ALGORITHM": "random",
   "SETTINGS": {
     "TIME_LIMIT": 480
