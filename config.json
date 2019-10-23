@@ -1,7 +1,14 @@
 {
   "TEST_DATA_PATH": "data/smallfaultmatrix.txt",
-  "ALGORITHM": "hill_climber",
+  "ALGORITHM": "ga",
   "SETTINGS": {
-    "TIME_LIMIT": 70
+    "INITIAL_NUMBER_OF_TESTS": 50,
+    "POPULATION_SIZE": 100,
+    "TIME_LIMIT": 70,
+    "ELITES_SIZE": 2,
+    "CROSSOVER_CHANCE": 0.2,
+    "MUTATION_CHANCE": 0.2,
+    "ADDITION_CHANCE": 0.2,
+    "REMOVAL_CHANCE": 0.2
   }
 }
