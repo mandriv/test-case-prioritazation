@@ -66,7 +66,7 @@ class Individual:
 
     def draw_graphs(self):
         # APFD and individual data
-        plt.figure(1)
+        plt.figure()
         plt.title("Fittest individual:\nPercent Detected Faults over all Test Suite Fractions")
         plt.xlabel("Test Suite Fraction")
         plt.ylabel("Percent Detected Faults")
@@ -85,7 +85,7 @@ class Individual:
         plt.text(0.5, 10, 'APFD: ' + str(round(self.apfd * 100, 2)) + '%')
         plt.draw()
 
-        plt.figure(2)
+        plt.figure()
         plt.title("Fittest individual:\nPerformance of the solution")
         plt.xlabel("Test Number")
         plt.ylabel("Percent Detected Faults")
@@ -161,9 +161,9 @@ class Individual:
         self.apfd_to_plateau = np.trapz(local_y, x = local_x)
         # fitness is weighted sum
         COMPLETENESS_WEIGHT = 0.8
-        PERFORMANCE_WEIGHT = 0.12
+        PERFORMANCE_WEIGHT = 0.1
         TOTAL_APFD_WEIGHT = (0.00, 0.01)[self.performance == 1.0]
-        LOCAL_APFD_WEIGHT = (0.07, 0.09)[self.performance == 1.0]
+        LOCAL_APFD_WEIGHT = (0.1, 0.09)[self.performance == 1.0]
         self.fitness = (COMPLETENESS_WEIGHT * self.completeness) + \
             (PERFORMANCE_WEIGHT * self.performance) + \
             (TOTAL_APFD_WEIGHT * self.apfd) + \

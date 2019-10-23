@@ -1,5 +1,6 @@
 import time
 import math
+import copy
 
 from .individual import Individual
 from .helpers import roulette_wheel_selection
@@ -51,14 +52,14 @@ def start(tests, config):
         population.sort(key=lambda individual: individual.fitness, reverse=True)
         # Assign best individual in generation 0
         if generation_number == 0:
-            best_individual = Individual(population[0].genes)
+            best_individual = copy.copy(population[0])
             print('Fittest individual in generation 0:')
             best_individual.print()
         # Check if new best individual was found
         if (population[0].fitness > best_individual.fitness):
             print('New fittest individual found in population ' + str(generation_number) + '!')
             population[0].print_comparison(best_individual)
-            best_individual = Individual(population[0].genes)
+            best_individual = copy.copy(population[0])
         # Assign fitness of best individual and generation no for statistics
         evaluation_graph.add_data(generation_number, best_individual.fitness)
         # prepare new population, apply elitism
@@ -86,7 +87,7 @@ def start(tests, config):
             new_population.append(child_one)
             new_population.append(child_two)
         # replace old population with the new one
-        population = new_population
+        population = new_population.copy()
         generation_number += 1
     # Draw statistics
     evaluation_graph.draw_graph('Best fitness individual over generation', 'Generation number', 'Fitness')

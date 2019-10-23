@@ -14,16 +14,15 @@ class Graph:
 
     def draw_graph(self, title, x_label, y_label):
         # APFD and individual data
-        plt.figure(1)
+        plt.figure()
         plt.title(title)
         plt.xlabel(x_label)
         plt.ylabel(x_label)
         axes = plt.gca()
         axes.set_xlim([0, self.x[-1]])
-        axes.set_ylim([0, self.y[-1]])
+        axes.set_ylim([self.y[0] - 0.02, self.y[-1]])
 
         plt.plot(self.x, self.y, marker='.')
         plt.grid()
 
         plt.draw()
-        plt.show()

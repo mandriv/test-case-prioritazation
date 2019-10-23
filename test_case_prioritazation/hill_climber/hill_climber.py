@@ -34,6 +34,9 @@ def start(tests, config):
         last_elapsed_time_floored = current_elapsed_time_floored
         # Generate new candidates
         candidates = []
+        # original
+        individual_copy = copy.copy(individual)
+        candidates.append(individual_copy)
         # mutation
         individual_copy = copy.copy(individual)
         individual_copy.mutate(tests, MUTATION_CHANCE)

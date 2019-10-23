@@ -1,6 +1,7 @@
 from .utils import test_data, cli
 from .ga import ga
 from .hill_climber import hill_climber
+from .random import random
 
 def main():
     config = cli.init()
@@ -14,6 +15,9 @@ def main():
         exit(0)
     elif algorithm_to_run == 'hill_climber':
         hill_climber.start(tests, settings)
+        exit(0)
+    elif algorithm_to_run == 'random':
+        random.start(tests, settings)
         exit(0)
     else:
         print('Unrecognized ALGORITHM type, check your config.json!')
