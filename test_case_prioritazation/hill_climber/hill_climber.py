@@ -10,8 +10,8 @@ def start(tests, config):
     TIME_LIMIT = config['TIME_LIMIT']
     # always perform operations
     MUTATION_CHANCE = 1.0
-    ADDITION_CHANCE = 10
-    REMOVAL_CHANCE = 10
+    ADDITION_CHANCE = 1.0
+    REMOVAL_CHANCE = 1.0
     start_time = time.time()
     elapsed = 0
     last_elapsed_time_floored = 0
@@ -56,6 +56,7 @@ def start(tests, config):
         candidates.append(individual_copy)
         # sort candidates by fitness
         candidates.sort(key=lambda individual: individual.fitness, reverse=True)
+
         # pick best one as new individual
         individual = copy.copy(candidates[0])
 

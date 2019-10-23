@@ -207,6 +207,7 @@ class Individual:
         random_gene_index = random.randint(0, self.get_number_of_tests() - 1)
         random_test_index = random.randint(0, len(test_pool) - 1)
         self.genes[random_gene_index] = test_pool[random_test_index]
+        self.calculate_fitness()
         return True
 
     # adds random tests at random index
@@ -228,6 +229,7 @@ class Individual:
         random_gene_index = random.randint(0, self.get_number_of_tests() - 1)
         random_test_index = random.randint(0, len(test_pool) - 1)
         self.genes.insert(random_gene_index, test_pool[random_test_index])
+        self.calculate_fitness()
         return True
 
     # removes test at random index
@@ -238,4 +240,5 @@ class Individual:
 
         random_gene_index = random.randint(0, self.get_number_of_tests() - 1)
         self.genes.pop(random_gene_index)
+        self.calculate_fitness()
         return True
